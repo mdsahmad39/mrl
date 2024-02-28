@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { useAlertService } from '.';
 import { useFetch } from '../_helpers/client/useFetch';
@@ -18,7 +18,6 @@ function useUserService(): IUserService {
     const alertService = useAlertService();
     const fetch = useFetch();
     const router = useRouter();
-    const searchParams = useSearchParams();
     const { users, user, currentUser } = userStore();
 
     return {
@@ -32,7 +31,7 @@ function useUserService(): IUserService {
                 userStore.setState({ ...initialState, currentUser });
 
                 // get return url from query parameters or default to '/'
-                const returnUrl = searchParams.get('returnUrl') || '/';
+                const returnUrl = '/';
                 router.push(returnUrl);
             } catch (error: any) {
                 alertService.error(error);
