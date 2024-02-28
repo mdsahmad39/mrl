@@ -16,18 +16,19 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+
+body {
+  background: #07c
+    url(https://images.unsplash.com/photo-1686425374911-e0d752e09806?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MjB8YlNoSExwd0FOX2t8fGVufDB8fHx8fA%3D%3D)
+    center / cover no-repeat fixed;
+  font: 1em/1.618 Nunito, sans-serif;
+}
+
+/* .app-container {
+    min-height: 350px;
+} */

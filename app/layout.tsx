@@ -16,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <script src="https://kit.fontawesome.com/fe4878f0c6.js" crossOrigin="anonymous"></script>
+      </head>
+      <body className={`bg-gradient-to-tl from-slate-800 via-violet-500 to-zinc-400 ${inter.className}`}>{children}</body>
     </html>
   );
 }
