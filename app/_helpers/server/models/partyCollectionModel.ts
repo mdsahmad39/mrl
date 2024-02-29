@@ -22,6 +22,7 @@ function partyCollectionModel() {
                 contact: { type: Number, required: true },
             }, required: true
         },
+        paymentPartyCode: { type: String, required: true },
         paymentParty: {
             type: {
                 code: { type: String, required: true },

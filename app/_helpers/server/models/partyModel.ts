@@ -7,6 +7,7 @@ function partyModel() {
         partyCode: { type: String, unique: true, required: true },
         ownerName: { type: String, required: true },
         accountantName: { type: String, required: true },
+        email: { type: String, required: true },
         company: { type: String, required: false },
         gstNumber: { type: String, required: false },
         ownerContact: { type: Number, required: true },
