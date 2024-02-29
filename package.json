@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.0.10",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "joi": "^17.12.2",

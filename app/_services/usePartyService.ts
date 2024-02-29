@@ -58,6 +58,7 @@ interface IParty {
     partyCode: String,
     ownerName: String,
     accountantName: String,
+    email: String,
     company: String,
     gstNumber: String,
     ownerContact: Number,

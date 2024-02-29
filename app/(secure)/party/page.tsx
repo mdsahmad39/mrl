@@ -47,7 +47,8 @@ function Users() {
                     <td>{party.company}</td>
                     <td>{party.ownerName}</td>
                     <td style={{ whiteSpace: 'nowrap' }}>
-                        <Link href={`/party/edit/${party.id}`} className="btn btn-sm btn-primary me-1">Edit <i className="fa-solid fa-pen-to-square"></i></Link>
+                        <Link href={`/party/edit/${party.id}`} className="btn btn-sm btn-primary me-1"><i className="fa-solid fa-pen-to-square"></i></Link>
+                        <Link href={`/party/view/${party.id}`} className="btn btn-sm btn-primary me-1"><i className="fa-solid fa-eye"></i></Link>
                     </td>
                 </tr>
             ));

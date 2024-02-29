@@ -6,6 +6,7 @@ const PartyCollectionModel = db.PartyCollectionModel;
 
 export const partyCollection = {
     getAll,
+    getAllByCode,
     getById,
     create,
     update,
@@ -14,6 +15,9 @@ export const partyCollection = {
 
 async function getAll() {
     return await PartyCollectionModel.find();
+}
+async function getAllByCode(code: string) {
+    return await PartyCollectionModel.find({ paymentPartyCode: code });
 }
 
 async function getById(id: string) {
@@ -28,6 +32,7 @@ async function create(params: any) {
     const code = await CounterService.nextCount(PARTY_COLLECTION, PARTY_COLLECTION_CODE, PARTY_COLLECTION_PREFIX, PARTY_COLLECTION_PADDING);
     const partyCollection = new PartyCollectionModel({
         collectionCode: code,
+        paymentPartyCode: params?.paymentParty?.code,
         ...params
     });
 
