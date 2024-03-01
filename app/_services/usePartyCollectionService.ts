@@ -4,6 +4,7 @@ import { useAlertService } from '.';
 import { useFetch } from '../_helpers/client/useFetch';
 
 export { usePartyCollectionService };
+export type { IPartyCollection };
 
 const initialState = {
     partyCollections: undefined,
@@ -17,13 +18,22 @@ function usePartyCollectionService(): IPartyCollectionService {
 
     return {
         partyCollections,
-        getByCode: async (code) => {
+        getByCode: async (id) => {
             partyCollectionStore.setState({ partyCollections: undefined });
             try {
-                partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollections/${code}`) });
+                partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollections/${id}`) });
             } catch (error: any) {
                 alertService.error(error);
             }
+        },
+        update: async (id, params) => {
+            await fetch.put(`/api/partycollection/${id}`, params);
+        },
+        create: async (partyCollection) => {
+            await fetch.post(`/api/partycollection`, partyCollection);
+        },
+        getAll: async () => {
+            partyCollectionStore.setState({ partyCollections: await fetch.get('/api/partycollection') });
         },
     }
 };
@@ -56,10 +66,10 @@ interface IPartyCollection {
     commodities: String,
     weight: Number,
     freight: Number,
-    partyDeductions: {
-        description: String,
-        amount: Number,
-    },
+    // partyDeductions: {
+    //     description: String,
+    //     amount: Number,
+    // },
     receivedAmount: Number,
     balanceAmount: Number,
     paymentDate: Date,
@@ -74,4 +84,7 @@ interface IPartyCollectionStore {
 
 interface IPartyCollectionService extends IPartyCollectionStore {
     getByCode: (code: String) => Promise<void>,
+    getAll: () => Promise<void>,
+    update: (id: string, params: Partial<IPartyCollection>) => Promise<void>,
+    create: (partyCollection: Partial<IPartyCollection>) => Promise<void>,
 }

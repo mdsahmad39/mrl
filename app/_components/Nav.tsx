@@ -25,6 +25,7 @@ function Nav() {
                         <NavLink href="/" exact className="nav-item nav-link">Home</NavLink>
                         <NavLink href="/users" className="nav-item nav-link">Users</NavLink>
                         <NavLink href="/party" className="nav-item nav-link">Party</NavLink>
+                        <NavLink href="/partycollection" className="nav-item nav-link">Party Collection</NavLink>
                         <button onClick={logout} className="btn btn-link nav-item nav-link" style={{ width: '67px' }} disabled={loggingOut}>
                             {loggingOut
                                 ? <span className="spinner-border spinner-border-sm"></span>

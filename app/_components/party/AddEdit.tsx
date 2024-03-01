@@ -22,6 +22,7 @@ function AddEdit({ title, party }: { title: string, party?: any }) {
         ownerName: register('ownerName', { required: 'Owner Name is required' }),
         accountantName: register('accountantName', { required: 'Accountant Name is required' }),
         company: register('company'),
+        email: register('email'),
         gstNumber: register('gstNumber'),
         ownerContact: register('ownerContact', {
             maxLength: { value: 10, message: 'length should be 10 digits' },
@@ -81,6 +82,11 @@ function AddEdit({ title, party }: { title: string, party?: any }) {
                     <label className="form-label">Company</label>
                     <input {...fields.company} type="text" className={`form-control ${errors.company ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Company' />
                     <div className="invalid-feedback">{errors.company?.message?.toString()}</div>
+                </div>
+                <div className="mb-4">
+                    <label className="form-label">Email</label>
+                    <input {...fields.email} type="email" className={`form-control ${errors.email ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Email' />
+                    <div className="invalid-feedback">{errors.email?.message?.toString()}</div>
                 </div>
                 <div className="mb-4">
                     <label className="form-label">GST Number</label>
