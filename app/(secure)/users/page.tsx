@@ -24,11 +24,11 @@ function Users() {
             <table className="table-fixed w-full bg-opacity-20 backdrop-filter backdrop-blur-md bg-slate-300 rounded-lg shadow">
                 <thead>
                     <tr className='text-left'>
-                        <th>S.No</th>
-                        <th>User Name</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th className='px-2 py-1'>S.No</th>
+                        <th className='px-2 py-1'>User Name</th>
+                        <th className='px-2 py-1'>Role</th>
+                        <th className='px-2 py-1'>Status</th>
+                        <th className='px-2 py-1'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,11 +42,11 @@ function Users() {
         if (users?.length) {
             return (users.map((user, i) =>
                 <tr key={user.id}>
-                    <td>{i + 1}</td>
-                    <td>{user.username}</td>
-                    <td>{user.role}</td>
-                    <td>{user.isActive ? 'Active' : 'Inactive'}</td>
-                    <td style={{ whiteSpace: 'nowrap' }}>
+                    <td className='px-2 py-1'>{i + 1}</td>
+                    <td className='px-2 py-1'>{user.username}</td>
+                    <td className='px-2 py-1'>{user.role}</td>
+                    <td className='px-2 py-1'>{user.isActive ? 'Active' : 'Inactive'}</td>
+                    <td className='px-2 py-1' style={{ whiteSpace: 'nowrap' }}>
                         <Link href={`/users/edit/${user.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
                         <button onClick={() => userService.delete(user.id)} className="btn btn-sm btn-danger btn-delete-user" style={{ width: '60px' }} disabled={user.isDeleting}>
                             {user.isDeleting

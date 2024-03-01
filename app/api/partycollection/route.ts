@@ -18,25 +18,25 @@ async function create(req: Request) {
 }
 
 create.schema = joi.object({
-    collectionCode: joi.string().required(),
+    collectionCode: joi.string().allow('').optional(),
     billingDate: joi.string().required(),
     truckNumber: joi.string().required(),
     sourceDestination: joi.string().required(),
     senderParty: {
         code: joi.string().required(),
         name: joi.string().required(),
-        contact: joi.string().required(),
+        contact: joi.number().required(),
     },
     receiverParty: {
         code: joi.string().required(),
         name: joi.string().required(),
-        contact: joi.string().required(),
+        contact: joi.number().required(),
     },
     paymentPartyCode: joi.string().required(),
     paymentParty: {
         code: joi.string().required(),
         name: joi.string().required(),
-        contact: joi.string().required(),
+        contact: joi.number().required(),
     },
     invoiceNumber: joi.string().required(),
     commodities: joi.string().required(),

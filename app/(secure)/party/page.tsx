@@ -24,11 +24,11 @@ function Users() {
             <table className="table-fixed w-full bg-opacity-20 backdrop-filter backdrop-blur-md bg-slate-300 rounded-lg shadow">
                 <thead>
                     <tr className='text-left'>
-                        <th>S.No</th>
-                        <th>Party Code</th>
-                        <th>Company</th>
-                        <th>Owner Name</th>
-                        <th>Actions</th>
+                        <th className='px-2 py-1'>S.No</th>
+                        <th className='px-2 py-1'>Party Code</th>
+                        <th className='px-2 py-1'>Company</th>
+                        <th className='px-2 py-1'>Owner Name</th>
+                        <th className='px-2 py-1'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,11 +42,11 @@ function Users() {
         if (parties?.length) {
             return (parties.map((party, i) =>
                 <tr key={party.id}>
-                    <td>{i + 1}</td>
-                    <td>{party.partyCode}</td>
-                    <td>{party.company}</td>
-                    <td>{party.ownerName}</td>
-                    <td style={{ whiteSpace: 'nowrap' }}>
+                    <td className='px-2 py-1'>{i + 1}</td>
+                    <td className='px-2 py-1'>{party.partyCode}</td>
+                    <td className='px-2 py-1'>{party.company}</td>
+                    <td className='px-2 py-1'>{party.ownerName}</td>
+                    <td className='px-2 py-1' style={{ whiteSpace: 'nowrap' }}>
                         <Link href={`/party/edit/${party.id}`} className="btn btn-sm btn-primary me-1"><i className="fa-solid fa-pen-to-square"></i></Link>
                         <Link href={`/party/view/${party.id}`} className="btn btn-sm btn-primary me-1"><i className="fa-solid fa-eye"></i></Link>
                     </td>

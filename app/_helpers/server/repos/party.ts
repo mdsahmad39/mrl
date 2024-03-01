@@ -1,6 +1,7 @@
 import { db } from '..';
 import CounterService from '../services/counter.service';
 import { PARTY, PARTY_CODE, PARTY_PADDING, PARTY_PREFIX } from '../helpers/constats';
+import { partyBalance } from '.';
 
 const Party = db.Party;
 
@@ -31,8 +32,9 @@ async function create(params: any) {
         ...params
     });
 
-    // save party
+    // save party & initialize balance amount
     await party.save();
+    await partyBalance.create({ partyCode: code, dueAmount: 0 });
 }
 
 async function update(id: string, params: any) {

@@ -8,20 +8,30 @@ export type { IPartyCollection };
 
 const initialState = {
     partyCollections: undefined,
+    partyCollection: undefined,
 };
 const partyCollectionStore = create<IPartyCollectionStore>(() => initialState);
 
 function usePartyCollectionService(): IPartyCollectionService {
     const alertService = useAlertService();
     const fetch = useFetch();
-    const { partyCollections } = partyCollectionStore();
+    const { partyCollections, partyCollection } = partyCollectionStore();
 
     return {
         partyCollections,
+        partyCollection,
+        getById: async (id) => {
+            partyCollectionStore.setState({ partyCollection: undefined });
+            try {
+                partyCollectionStore.setState({ partyCollection: await fetch.get(`/api/partycollection/view/${id}`) });
+            } catch (error: any) {
+                alertService.error(error);
+            }
+        },
         getByCode: async (id) => {
             partyCollectionStore.setState({ partyCollections: undefined });
             try {
-                partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollections/${id}`) });
+                partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollection/${id}`) });
             } catch (error: any) {
                 alertService.error(error);
             }
@@ -80,10 +90,12 @@ interface IPartyCollection {
 
 interface IPartyCollectionStore {
     partyCollections?: IPartyCollection[],
+    partyCollection?: IPartyCollection,
 }
 
 interface IPartyCollectionService extends IPartyCollectionStore {
     getByCode: (code: String) => Promise<void>,
+    getById: (id: String) => Promise<void>,
     getAll: () => Promise<void>,
     update: (id: string, params: Partial<IPartyCollection>) => Promise<void>,
     create: (partyCollection: Partial<IPartyCollection>) => Promise<void>,
