@@ -3,8 +3,7 @@
 import { useEffect } from 'react';
 import { usePartyBalanceService, usePartyCollectionService, usePartyService } from '_services';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { Spinner } from '_components';
+import { CollectionsTable } from '_components/partycollection';
 
 export default View;
 
@@ -80,56 +79,9 @@ function View({ params: { id } }: any) {
                     </div>
                 </div>
                 <div className="flex flex-wrap -mx-4">
-                    <table id="collections" className="bg-white table-auto w-full">
-                        <thead>
-                            <tr>
-                                <th className="px-4 py-2">S.No</th>
-                                <th className="px-4 py-2">Billing Date</th>
-                                <th className="px-4 py-2">From - To</th>
-                                <th className="px-4 py-2">Balance</th>
-                                <th className="px-4 py-2">Paid</th>
-                                <th className="px-4 py-2">Payment Reference</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <CollectionsTableBody />
-                        </tbody>
-                    </table>
+                    <CollectionsTable partyCollection={partyCollections} />
                 </div>
             </div>
         </div>
     );
-
-    function CollectionsTableBody() {
-        if (partyCollections?.length) {
-            return (partyCollections.map((coll, i) =>
-                <tr key={coll.id}>
-                    <td className="border px-4 py-2">{i + 1}</td>
-                    <td style={{ whiteSpace: 'nowrap' }}>
-                        <Link href={`/party`} className="btn btn-sm btn-primary me-1"><i className="fa-solid fa-eye"></i></Link>
-                    </td>
-                </tr>
-            ));
-        }
-
-        if (!partyCollections) {
-            return (
-                <tr>
-                    <td colSpan={4}>
-                        <Spinner />
-                    </td>
-                </tr>
-            );
-        }
-
-        if (partyCollections?.length === 0) {
-            return (
-                <tr>
-                    <td colSpan={4} className="text-center">
-                        <div className="p-2">No Collections Data To Display</div>
-                    </td>
-                </tr>
-            );
-        }
-    }
 }

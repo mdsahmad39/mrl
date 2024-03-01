@@ -23,6 +23,7 @@ update.schema = joi.object({
     ownerName: joi.string().required(),
     accountantName: joi.string().required(),
     company: joi.string().allow('').optional(),
+    email: joi.string().allow('').optional(),
     gstNumber: joi.string().allow('').optional(),
     ownerContact: joi.number().required(),
     accountantContact: joi.number().allow('').optional(),

@@ -34,12 +34,12 @@ function partyCollectionModel() {
         commodities: { type: String, required: true },
         weight: { type: Number, required: true },
         freight: { type: Number, required: true },
-        partyDeductions: {
-            type: [{
-                description: { type: String, required: true },
-                amount: { type: Number, required: true },
-            }], required: false
-        },
+        // partyDeductions: {
+        //     type: [{
+        //         description: { type: String, required: true },
+        //         amount: { type: Number, required: true },
+        //     }], required: false
+        // },
         receivedAmount: { type: Number, required: true },
         balanceAmount: { type: Number, required: true },
         paymentDate: { type: Date, required: true },

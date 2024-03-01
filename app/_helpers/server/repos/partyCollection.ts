@@ -32,7 +32,6 @@ async function create(params: any) {
     const code = await CounterService.nextCount(PARTY_COLLECTION, PARTY_COLLECTION_CODE, PARTY_COLLECTION_PREFIX, PARTY_COLLECTION_PADDING);
     const partyCollection = new PartyCollectionModel({
         collectionCode: code,
-        paymentPartyCode: params?.paymentParty?.code,
         ...params
     });
 
