@@ -6,6 +6,7 @@ export const partyBalance = {
     getAll,
     getById,
     getByCode,
+    updatePartyBalance,
     create,
     update,
     updateByCode,
@@ -27,6 +28,17 @@ async function getById(id: string) {
 async function getByCode(code: string) {
     try {
         return await PartyBalance.findOne({ partyCode: code });
+    } catch {
+        throw 'Party Not Found';
+    }
+}
+
+async function updatePartyBalance(code: string, amount: string) {
+    try {
+        const partyBalance = await PartyBalance.findOne({ partyCode: code });
+        const balanceAmount = parseFloat(amount) + parseFloat(partyBalance?.dueAmount);
+        Object.assign(partyBalance, { dueAmount: balanceAmount });
+        await partyBalance.save();
     } catch {
         throw 'Party Not Found';
     }

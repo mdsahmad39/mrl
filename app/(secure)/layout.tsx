@@ -18,10 +18,8 @@ function Layout({ children }: { children: React.ReactNode }) {
         <div className="">
             <Nav />
             <Alert />
-            <div className="p-4">
-                <div className="container">
-                    {children}
-                </div>
+            <div className="p-4 items-center">
+                {children}
             </div>
         </div>
     );

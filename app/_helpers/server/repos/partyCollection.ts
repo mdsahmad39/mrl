@@ -1,6 +1,7 @@
 import { db } from '..';
 import CounterService from '../services/counter.service';
 import { PARTY_COLLECTION, PARTY_COLLECTION_CODE, PARTY_COLLECTION_PADDING, PARTY_COLLECTION_PREFIX } from '../helpers/constats';
+import { partyBalance } from '.';
 
 const PartyCollectionModel = db.PartyCollectionModel;
 
@@ -36,6 +37,7 @@ async function create(params: any) {
     });
 
     await partyCollection.save();
+    await partyBalance.updatePartyBalance(params?.paymentPartyCode, params?.balanceAmount);
 }
 
 async function update(id: string, params: any) {

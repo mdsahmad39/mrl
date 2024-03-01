@@ -20,7 +20,7 @@ export default function RootLayout({
       <head>
         <Script src="https://kit.fontawesome.com/fe4878f0c6.js" crossOrigin="anonymous"></Script>
       </head>
-      <body className={`bg-gradient-to-tl from-slate-800 via-violet-500 to-zinc-400 ${inter.className}`}>{children}</body>
+      <body className={`text-white ${inter.className}`}>{children}</body>
     </html>
   );
 }

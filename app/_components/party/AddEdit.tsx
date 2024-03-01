@@ -61,59 +61,59 @@ function AddEdit({ title, party }: { title: string, party?: any }) {
     }
 
     return (
-        <div className='shadow-2xl shadow-slate-900 mx-auto text-white bg-clip-padding backdrop-filter bg-white bg-opacity-10 backdrop-blur-md mt-20 py-10 px-8 rounded-md'>
-            <h4 className="text-center text-2xl">{title}</h4>
-            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-wrap gap-4 content-around'>
-                <div className="mb-4">
+        <div className='w-full rounded-2xl shadow-slate-900 mx-auto text-white bg-clip-padding backdrop-filter bg-white bg-opacity-10 backdrop-blur-md mt-20 py-10 px-8 justify-center rounded-md'>
+            <h4 className="text-center text-bold text-4xl my-4">{title}</h4>
+            <form onSubmit={handleSubmit(onSubmit)} className='flex flex-wrap gap-10 justify-evenly'>
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Party Code</label>
                     <input {...fields.partyCode} type="text" className={`form-control bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Will be generated after creation' disabled />
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Owner Name</label>
                     <input {...fields.ownerName} type="text" className={`form-control ${errors.ownerName ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Owner Name' />
                     <div className="invalid-feedback">{errors.ownerName?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Accountant Name</label>
                     <input {...fields.accountantName} type="text" className={`form-control ${errors.accountantName ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Accountant Name' />
                     <div className="invalid-feedback">{errors.accountantName?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Company</label>
                     <input {...fields.company} type="text" className={`form-control ${errors.company ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Company' />
                     <div className="invalid-feedback">{errors.company?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Email</label>
                     <input {...fields.email} type="email" className={`form-control ${errors.email ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Email' />
                     <div className="invalid-feedback">{errors.email?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">GST Number</label>
                     <input {...fields.gstNumber} type="text" className={`form-control ${errors.gstNumber ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='GST Number' />
                     <div className="invalid-feedback">{errors.gstNumber?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Owner Contact</label>
                     <input {...fields.ownerContact} type="number" className={`form-control ${errors.ownerContact ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Owner Contact Number' />
                     <div className="invalid-feedback">{errors.ownerContact?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Accountant Contact</label>
                     <input {...fields.accountantContact} type="number" className={`form-control ${errors.accountantContact ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Accountant Contact Number' />
                     <div className="invalid-feedback">{errors.accountantContact?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Subjected To</label>
                     <input {...fields.subjectedTo} type="text" className={`form-control ${errors.subjectedTo ? 'is-invalid' : ''} bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Subjected To Jurisdiction' />
                     <div className="invalid-feedback">{errors.subjectedTo?.message?.toString()}</div>
                 </div>
-                <div className="mb-4">
+                <div className="w-full sm:w-1/1 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
                     <label className="form-label">Address</label>
                     <input {...fields.address} type="textarea" className={`form-control ${errors.address ? 'is-invalid' : ''}  bg-white bg-white bg-opacity-10 hover:bg-opacity-20 transition duration-500 shadow-inner shadow-slate-600/90 rounded-md p-3 outline-none w-full`} placeholder='Address' />
                     <div className="invalid-feedback">{errors.address?.message?.toString()}</div>
                 </div>
-                <div className="grid grid-cols-3 gap-4 content-around">
+                <div className="w-full grid grid-cols-9 gap-4 justify-evenly">
                     <div><button type="submit" disabled={formState.isSubmitting} className="backdrop bg-white bg-opacity-0 border border-gray px-3 py-1.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-40 hover:bg-opacity-50 text-lg">
                         {formState.isSubmitting && <span className="spinner-border spinner-border-sm me-1"></span>}
                         Save
