@@ -8,24 +8,26 @@ export { CollectionsTable };
 function CollectionsTable({ partyCollections }: any) {
     console.log(partyCollections);
     return (
-        <table id="collections" className="w-full rounded-2xl shadow-slate-900 text-white bg-clip-padding backdrop-filter bg-white bg-opacity-10 backdrop-blur-md py-10 rounded-md table-auto">
-            <thead className="border">
-                <tr>
-                    <th className="border px-2 py-1">S.No</th>
-                    <th className="border px-2 py-1">Truck No.</th>
-                    <th className="border px-2 py-1">Invoice</th>
-                    <th className="border px-2 py-1">Payment Party</th>
-                    <th className="border px-2 py-1">Freight</th>
-                    <th className="border px-2 py-1">Received Amount</th>
-                    <th className="border px-2 py-1">Payment Date</th>
-                    <th className="border px-2 py-1">Balance Amount</th>
-                    <th className="border px-2 py-1">View</th>
-                </tr>
-            </thead>
-            <tbody>
-                <CollectionsTableBody partyCollections={partyCollections} />
-            </tbody>
-        </table>
+        <div className='overflow-auto rounded-lg bg-opacity-20 backdrop-filter backdrop-blur-md bg-slate-300 shadow border'>
+            <table id="collections" className="w-full text-white table-auto">
+                <thead>
+                    <tr>
+                        <th className="border px-2 py-1">S.No</th>
+                        <th className="border px-2 py-1">Truck No.</th>
+                        <th className="border px-2 py-1">Invoice</th>
+                        <th className="border px-2 py-1">Payment Party</th>
+                        <th className="border px-2 py-1">Freight</th>
+                        <th className="border px-2 py-1">Received Amount</th>
+                        <th className="border px-2 py-1">Payment Date</th>
+                        <th className="border px-2 py-1">Balance Amount</th>
+                        <th className="border px-2 py-1">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <CollectionsTableBody partyCollections={partyCollections} />
+                </tbody>
+            </table>
+        </div>
     );
 }
 

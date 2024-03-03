@@ -21,20 +21,22 @@ function Users() {
             <div className='m-5'>
                 <Link href="/users/add" className="backdrop bg-white bg-opacity-0 border border-gray px-3 py-1.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-40 hover:bg-opacity-50 text-lg">Add User</Link>
             </div>
-            <table className="table-fixed w-full bg-opacity-20 backdrop-filter backdrop-blur-md bg-slate-300 rounded-lg shadow">
-                <thead>
-                    <tr className='text-left'>
-                        <th className='px-2 py-1'>S.No</th>
-                        <th className='px-2 py-1'>User Name</th>
-                        <th className='px-2 py-1'>Role</th>
-                        <th className='px-2 py-1'>Status</th>
-                        <th className='px-2 py-1'>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <TableBody />
-                </tbody>
-            </table>
+            <div className='overflow-auto rounded-lg bg-opacity-20 backdrop-filter backdrop-blur-md bg-slate-300 shadow border'>
+                <table className="w-full">
+                    <thead>
+                        <tr className='text-left'>
+                            <th className='px-2 py-1'>S.No</th>
+                            <th className='px-2 py-1'>User Name</th>
+                            <th className='px-2 py-1'>Role</th>
+                            <th className='px-2 py-1'>Status</th>
+                            <th className='px-2 py-1'>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <TableBody />
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 
@@ -47,13 +49,7 @@ function Users() {
                     <td className='px-2 py-1'>{user.role}</td>
                     <td className='px-2 py-1'>{user.isActive ? 'Active' : 'Inactive'}</td>
                     <td className='px-2 py-1' style={{ whiteSpace: 'nowrap' }}>
-                        <Link href={`/users/edit/${user.id}`} className="btn btn-sm btn-primary me-1">Edit</Link>
-                        <button onClick={() => userService.delete(user.id)} className="btn btn-sm btn-danger btn-delete-user" style={{ width: '60px' }} disabled={user.isDeleting}>
-                            {user.isDeleting
-                                ? <span className="spinner-border spinner-border-sm"></span>
-                                : <span>Delete</span>
-                            }
-                        </button>
+                        <Link href={`/users/edit/${user.id}`} className="btn btn-sm btn-primary me-1"><i className="fa-solid fa-pen-to-square"></i></Link>
                     </td>
                 </tr>
             ));
