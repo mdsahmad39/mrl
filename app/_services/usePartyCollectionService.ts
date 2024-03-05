@@ -9,6 +9,7 @@ export type { IPartyCollection };
 const initialState = {
     partyCollections: undefined,
     partyCollection: undefined,
+    pages: undefined,
 };
 const partyCollectionStore = create<IPartyCollectionStore>(() => initialState);
 
@@ -42,8 +43,8 @@ function usePartyCollectionService(): IPartyCollectionService {
         create: async (partyCollection) => {
             await fetch.post(`/api/partycollection`, partyCollection);
         },
-        getAll: async () => {
-            partyCollectionStore.setState({ partyCollections: await fetch.get('/api/partycollection') });
+        getAll: async (term: string) => {
+            partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollection?term=${term}`) });
         },
     }
 };
@@ -91,12 +92,13 @@ interface IPartyCollection {
 interface IPartyCollectionStore {
     partyCollections?: IPartyCollection[],
     partyCollection?: IPartyCollection,
+    pages?: Number,
 }
 
 interface IPartyCollectionService extends IPartyCollectionStore {
     getByCode: (code: String) => Promise<void>,
     getById: (id: String) => Promise<void>,
-    getAll: () => Promise<void>,
+    getAll: (term: string) => Promise<void>,
     update: (id: string, params: Partial<IPartyCollection>) => Promise<void>,
     create: (partyCollection: Partial<IPartyCollection>) => Promise<void>,
 }

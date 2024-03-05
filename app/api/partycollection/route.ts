@@ -8,8 +8,10 @@ module.exports = apiHandler({
     POST: create
 });
 
-async function getAll() {
-    return await partyCollectionRepo.getAll();
+async function getAll(req: Request) {
+    const url = new URL(req.url);
+    const searchParams = new URLSearchParams(url.searchParams);
+    return await partyCollectionRepo.getAll(searchParams.get('term') ?? '');
 }
 
 async function create(req: Request) {

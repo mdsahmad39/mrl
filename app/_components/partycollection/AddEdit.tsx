@@ -49,7 +49,6 @@ function AddEdit({ title, partyCollection }: { title: string, partyCollection?: 
     };
 
     async function onSubmit(data: any) {
-        console.log('in submit');
         alertService.clear();
         try {
             let message;

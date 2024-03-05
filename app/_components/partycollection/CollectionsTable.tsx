@@ -1,33 +1,59 @@
 import { Spinner } from "_components";
+import Search from "_components/ui/search";
 import dateFormatter from "_components/utils/globalutils";
-import { IPartyCollection } from "_services";
+import { IPartyCollection, usePartyCollectionService } from "_services";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export { CollectionsTable };
 
-function CollectionsTable({ partyCollections }: any) {
-    console.log(partyCollections);
+interface Props {
+    searchParams?: {
+        query?: string;
+    },
+    partyCode?: string,
+}
+
+function CollectionsTable({ searchParams, partyCode }: any) {
+    const query = searchParams?.query || '';
+    const partyCollectionService = usePartyCollectionService();
+    const partyCollections = partyCollectionService.partyCollections;
+
+
+    useEffect(() => {
+        if (partyCode) {
+            partyCollectionService.getByCode(partyCode);
+        } else {
+            partyCollectionService.getAll(query);
+        }
+    }, [partyCode, query]);
+
     return (
-        <div className='overflow-auto rounded-lg bg-opacity-20 backdrop-filter backdrop-blur-md bg-slate-300 shadow border'>
-            <table id="collections" className="w-full text-white table-auto">
-                <thead>
-                    <tr>
-                        <th className="border px-2 py-1">S.No</th>
-                        <th className="border px-2 py-1">Truck No.</th>
-                        <th className="border px-2 py-1">Invoice</th>
-                        <th className="border px-2 py-1">Payment Party</th>
-                        <th className="border px-2 py-1">Freight</th>
-                        <th className="border px-2 py-1">Received Amount</th>
-                        <th className="border px-2 py-1">Payment Date</th>
-                        <th className="border px-2 py-1">Balance Amount</th>
-                        <th className="border px-2 py-1">View</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <CollectionsTableBody partyCollections={partyCollections} />
-                </tbody>
-            </table>
-        </div>
+        <>
+            <div className="my-4 flex items-center justify-between gap-2 md:mt-8">
+                <Search placeholder="Search with invoices, truck, party..." />
+            </div>
+            <div className='overflow-auto bg-white-900 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-100 shadow border'>
+                <table id="collections" className="w-full text-white table-auto">
+                    <thead>
+                        <tr>
+                            <th className="border px-2 py-1">S.No</th>
+                            <th className="border px-2 py-1">Truck No.</th>
+                            <th className="border px-2 py-1">Invoice</th>
+                            <th className="border px-2 py-1">Payment Party</th>
+                            <th className="border px-2 py-1">Freight</th>
+                            <th className="border px-2 py-1">Received Amount</th>
+                            <th className="border px-2 py-1">Payment Date</th>
+                            <th className="border px-2 py-1">Balance Amount</th>
+                            <th className="border px-2 py-1">View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <CollectionsTableBody partyCollections={partyCollections} />
+                    </tbody>
+                </table>
+            </div>
+        </>
     );
 }
 

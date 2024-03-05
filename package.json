@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@vercel/speed-insights": "^1.0.10",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
+    "clsx": "^2.1.0",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0",
@@ -19,6 +19,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
+    "use-debounce": "^10.0.0",
     "zustand": "^4.5.1"
   },
   "devDependencies": {

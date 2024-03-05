@@ -7,6 +7,7 @@ const PartyCollectionModel = db.PartyCollectionModel;
 
 export const partyCollection = {
     getAll,
+    getCount,
     getAllByCode,
     getById,
     create,
@@ -14,9 +15,39 @@ export const partyCollection = {
     delete: _delete
 };
 
-async function getAll() {
-    return await PartyCollectionModel.find();
+async function getAll(term: string = '') {
+    return await PartyCollectionModel.find({
+        $or: [
+            {
+                invoiceNumber: { $regex: term, $options: 'i' }
+            },
+            {
+                truckNumber: { $regex: term, $options: 'i' }
+            },
+            {
+                'paymentParty.name': { $regex: term, $options: 'i' }
+            },
+        ]
+    });
 }
+async function getCount(term: string = '', limit: number) {
+    const count = await PartyCollectionModel.find({
+        $or: [
+            {
+                invoice: { $regex: term }
+            },
+            {
+                truckNumber: { $regex: term }
+            },
+            {
+                'paymentParty.name': { $regex: term }
+            },
+        ]
+    });
+    const totalPages = Math.ceil(Number(count) / limit);
+    return totalPages;
+}
+
 async function getAllByCode(code: string) {
     return await PartyCollectionModel.find({ paymentPartyCode: code });
 }
