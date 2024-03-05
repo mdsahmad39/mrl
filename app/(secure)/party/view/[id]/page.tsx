@@ -14,8 +14,6 @@ function View({ params: { id } }: any) {
     const partyCollectionService = usePartyCollectionService();
     const party = partyService.party;
     const partyBalance = partyBalanceService.partyBalance;
-    const partyCollections = partyCollectionService.partyCollections;
-    console.log(partyCollections);
 
     useEffect(() => {
         if (!id) return;
@@ -26,7 +24,6 @@ function View({ params: { id } }: any) {
     useEffect(() => {
         if (!party?.partyCode) return;
         partyBalanceService.getByCode(party?.partyCode);
-        partyCollectionService.getByCode(party?.partyCode);
     }, [party?.partyCode]);
 
     return (
@@ -79,9 +76,7 @@ function View({ params: { id } }: any) {
                     </div>
                 </div>
                 <h4 className="text-center text-bold text-4xl my-4">Party Collections</h4>
-                <div className="flex flex-wrap -mx-4">
-                    <CollectionsTable partyCollections={partyCollections} />
-                </div>
+                <CollectionsTable partyCode={party?.partyCode} />
             </div>
         </div>
     );

@@ -16,7 +16,7 @@ function Nav() {
         { id: 1, title: 'Home', path: '/' },
         { id: 2, title: 'Users', path: '/users' },
         { id: 3, title: 'Party', path: '/party' },
-        { id: 4, title: 'Party Collections', path: '/partycollection' },
+        { id: 4, title: 'Collections', path: '/partycollection' },
     ];
 
     async function logout() {
