@@ -76,7 +76,7 @@ function View({ params: { id } }: any) {
                     </div>
                 </div>
                 <h4 className="text-center text-bold text-4xl my-4">Party Collections</h4>
-                <CollectionsTable partyCode={party?.partyCode} />
+                <CollectionsTable partyCode={party?.partyCode + ''} />
             </div>
         </div>
     );

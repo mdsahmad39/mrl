@@ -11,7 +11,7 @@ module.exports = apiHandler({
 async function getAll(req: Request) {
     const url = new URL(req.url);
     const searchParams = new URLSearchParams(url.searchParams);
-    return await partyCollectionRepo.getAll(searchParams.get('term') ?? '');
+    return await partyCollectionRepo.getAll(searchParams);
 }
 
 async function create(req: Request) {
