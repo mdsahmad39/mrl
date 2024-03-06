@@ -12,6 +12,7 @@
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.10",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0",

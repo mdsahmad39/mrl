@@ -1,4 +1,7 @@
+'use client';
+
 import { Spinner } from "_components";
+import DateFilter from "_components/ui/dateFilter";
 import Search from "_components/ui/search";
 import dateFormatter from "_components/utils/globalutils";
 import { IPartyCollection, usePartyCollectionService } from "_services";
@@ -10,12 +13,16 @@ export { CollectionsTable };
 interface Props {
     searchParams?: {
         query?: string;
+        startDate?: string;
+        endDate?: string;
     },
     partyCode?: string,
 }
 
-function CollectionsTable({ searchParams, partyCode }: any) {
+function CollectionsTable({ searchParams, partyCode }: Props) {
     const query = searchParams?.query || '';
+    const startDate = searchParams?.startDate || '';
+    const endDate = searchParams?.endDate || '';
     const partyCollectionService = usePartyCollectionService();
     const partyCollections = partyCollectionService.partyCollections;
 
@@ -24,15 +31,15 @@ function CollectionsTable({ searchParams, partyCode }: any) {
         if (partyCode) {
             partyCollectionService.getByCode(partyCode);
         } else {
-            partyCollectionService.getAll(query);
+            partyCollectionService.getAll(query, startDate, endDate);
         }
-    }, [partyCode, query]);
+    }, [partyCode, query, startDate, endDate]);
 
     return (
         <>
-            <div className="my-4 flex items-center justify-between gap-2 md:mt-8">
-                <Search placeholder="Search with invoices, truck, party..." />
-            </div>
+            <Search placeholder="Search with invoices, truck, party..." />
+            <DateFilter />
+            <h4 className="text-center text-bold text-4xl my-4">Results</h4>
             <div className='overflow-auto bg-white-900 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-100 shadow border'>
                 <table id="collections" className="w-full text-white table-auto">
                     <thead>
@@ -43,6 +50,7 @@ function CollectionsTable({ searchParams, partyCode }: any) {
                             <th className="border px-2 py-1">Payment Party</th>
                             <th className="border px-2 py-1">Freight</th>
                             <th className="border px-2 py-1">Received Amount</th>
+                            <th className="border px-2 py-1">Billing Date</th>
                             <th className="border px-2 py-1">Payment Date</th>
                             <th className="border px-2 py-1">Balance Amount</th>
                             <th className="border px-2 py-1">View</th>
@@ -68,6 +76,7 @@ function CollectionsTableBody({ partyCollections }: any) {
                 <td className="border px-2 py-1">{coll?.paymentParty?.name}</td>
                 <td className="border px-2 py-1">{coll?.freight?.toString()}</td>
                 <td className="border px-2 py-1">{coll?.receivedAmount?.toString()}</td>
+                <td className="border px-2 py-1">{dateFormatter(coll?.billingDate)}</td>
                 <td className="border px-2 py-1">{dateFormatter(coll?.paymentDate)}</td>
                 <td className="border px-2 py-1">{coll?.balanceAmount?.toString()}</td>
                 <td className="border px-2 py-1 text-center">

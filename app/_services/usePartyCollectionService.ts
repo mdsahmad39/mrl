@@ -43,8 +43,8 @@ function usePartyCollectionService(): IPartyCollectionService {
         create: async (partyCollection) => {
             await fetch.post(`/api/partycollection`, partyCollection);
         },
-        getAll: async (term: string) => {
-            partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollection?term=${term}`) });
+        getAll: async (term: string, startDate: string, endDate: string) => {
+            partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollection?term=${term}&startDate=${startDate}&endDate=${endDate}`) });
         },
     }
 };
@@ -98,7 +98,7 @@ interface IPartyCollectionStore {
 interface IPartyCollectionService extends IPartyCollectionStore {
     getByCode: (code: String) => Promise<void>,
     getById: (id: String) => Promise<void>,
-    getAll: (term: string) => Promise<void>,
+    getAll: (term: string, startDate: string, endDate: string) => Promise<void>,
     update: (id: string, params: Partial<IPartyCollection>) => Promise<void>,
     create: (partyCollection: Partial<IPartyCollection>) => Promise<void>,
 }

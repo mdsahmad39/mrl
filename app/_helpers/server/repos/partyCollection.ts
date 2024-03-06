@@ -2,6 +2,7 @@ import { db } from '..';
 import CounterService from '../services/counter.service';
 import { PARTY_COLLECTION, PARTY_COLLECTION_CODE, PARTY_COLLECTION_PADDING, PARTY_COLLECTION_PREFIX } from '../helpers/constats';
 import { partyBalance } from '.';
+import { resolveDates } from '../helpers/date.helper';
 
 const PartyCollectionModel = db.PartyCollectionModel;
 
@@ -15,8 +16,15 @@ export const partyCollection = {
     delete: _delete
 };
 
-async function getAll(term: string = '') {
+async function getAll(searchParams: URLSearchParams) {
+    const term: string = searchParams.get('term') ?? '';
+    const { startDate, endDate } = resolveDates(searchParams);
+
     return await PartyCollectionModel.find({
+        billingDate: {
+            $gte: new Date(startDate.setHours(0, 0, 0)),
+            $lt: new Date(endDate.setHours(23, 59, 59))
+        },
         $or: [
             {
                 invoiceNumber: { $regex: term, $options: 'i' }
@@ -28,7 +36,7 @@ async function getAll(term: string = '') {
                 'paymentParty.name': { $regex: term, $options: 'i' }
             },
         ]
-    });
+    }).sort({ billingDate: 'desc' });
 }
 async function getCount(term: string = '', limit: number) {
     const count = await PartyCollectionModel.find({
