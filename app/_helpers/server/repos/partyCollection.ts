@@ -56,8 +56,22 @@ async function getCount(term: string = '', limit: number) {
     return totalPages;
 }
 
-async function getAllByCode(code: string) {
-    return await PartyCollectionModel.find({ paymentPartyCode: code });
+async function getAllByCode(code: string, searchParams: URLSearchParams) {
+
+    const { startDate, endDate } = resolveDates(searchParams);
+    return await PartyCollectionModel.find({
+        $and: [
+            {
+                paymentPartyCode: code
+            },
+            {
+                billingDate: {
+                    $gte: new Date(startDate.setHours(0, 0, 0)),
+                    $lt: new Date(endDate.setHours(23, 59, 59))
+                },
+            }
+        ]
+    }).sort({ billingDate: 'desc' });
 }
 
 async function getById(id: string) {

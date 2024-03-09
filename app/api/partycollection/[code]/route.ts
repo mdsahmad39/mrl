@@ -9,8 +9,10 @@ module.exports = apiHandler({
     DELETE: _delete
 });
 
-async function getByCode(req: Request, { params: { id } }: any) {
-    return await partyCollectionRepo.getAllByCode(id);
+async function getByCode(req: Request, { params: { code } }: any) {
+    const url = new URL(req.url);
+    const searchParams = new URLSearchParams(url.searchParams);
+    return await partyCollectionRepo.getAllByCode(code, searchParams);
 }
 
 async function update(req: Request, { params: { id } }: any) {
