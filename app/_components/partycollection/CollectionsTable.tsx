@@ -30,7 +30,7 @@ function CollectionsTable({ searchParams, partyCode }: Props) {
 
     useEffect(() => {
         if (partyCode) {
-            partyCollectionService.getByCode(partyCode);
+            partyCollectionService.getByCode(partyCode, startDate, endDate);
         } else {
             partyCollectionService.getAll(query, startDate, endDate);
         }
@@ -40,6 +40,7 @@ function CollectionsTable({ searchParams, partyCode }: Props) {
 
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
+        pageStyle: () => "@page { size: landscape; }"
     });
 
     return (

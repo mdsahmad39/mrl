@@ -4,7 +4,7 @@ const dateFormatter = (date: Date) => {
     const month = String(providedDate.getMonth() + 1).padStart(2, '0')
     const day = String(providedDate.getDate()).padStart(2, '0')
 
-    return `${day}-${month}-${year}`;
+    return `${day}/${month}/${year}`;
 }
 
 export const generatePagination = (currentPage: number, totalPages: number) => {

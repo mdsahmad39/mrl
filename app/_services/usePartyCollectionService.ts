@@ -29,10 +29,10 @@ function usePartyCollectionService(): IPartyCollectionService {
                 alertService.error(error);
             }
         },
-        getByCode: async (id) => {
+        getByCode: async (code: string, startDate: string, endDate: string) => {
             partyCollectionStore.setState({ partyCollections: undefined });
             try {
-                partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollection/${id}`) });
+                partyCollectionStore.setState({ partyCollections: await fetch.get(`/api/partycollection/${code}?startDate=${startDate}&endDate=${endDate}`) });
             } catch (error: any) {
                 alertService.error(error);
             }
@@ -96,7 +96,7 @@ interface IPartyCollectionStore {
 }
 
 interface IPartyCollectionService extends IPartyCollectionStore {
-    getByCode: (code: String) => Promise<void>,
+    getByCode: (code: string, startDate: string, endDate: string) => Promise<void>,
     getById: (id: String) => Promise<void>,
     getAll: (term: string, startDate: string, endDate: string) => Promise<void>,
     update: (id: string, params: Partial<IPartyCollection>) => Promise<void>,
