@@ -6,7 +6,9 @@ import Search from "_components/ui/search";
 import dateFormatter from "_components/utils/globalutils";
 import { IPartyCollection, usePartyCollectionService } from "_services";
 import Link from "next/link";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import { useReactToPrint } from "react-to-print";
+import { PrintableCollectionsTable } from "./print/CollectionsTable";
 
 export { CollectionsTable };
 
@@ -26,7 +28,6 @@ function CollectionsTable({ searchParams, partyCode }: Props) {
     const partyCollectionService = usePartyCollectionService();
     const partyCollections = partyCollectionService.partyCollections;
 
-
     useEffect(() => {
         if (partyCode) {
             partyCollectionService.getByCode(partyCode);
@@ -35,12 +36,23 @@ function CollectionsTable({ searchParams, partyCode }: Props) {
         }
     }, [partyCode, query, startDate, endDate]);
 
+    const printRef = React.useRef<any>();
+
+    const handlePrint = useReactToPrint({
+        content: () => printRef.current,
+    });
+
     return (
         <>
             <Search placeholder="Search with invoices, truck, party..." />
             <DateFilter />
-            <h4 className="text-center text-bold text-4xl my-4">Results</h4>
-            <div className='overflow-auto bg-white-900 rounded-lg bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-100 shadow border'>
+            <h4 className="text-center text-bold text-4xl my-4">Results <i className="fa fa-download cursor-pointer" onClick={handlePrint}></i></h4>
+            <div className="hidden">
+                <div ref={printRef} >
+                    <PrintableCollectionsTable partyCollections={partyCollections} />
+                </div>
+            </div>
+            <div className='overflow-auto bg-white-900 text-black rounded-lg bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-100 shadow border'>
                 <table id="collections" className="w-full text-white table-auto">
                     <thead>
                         <tr>
